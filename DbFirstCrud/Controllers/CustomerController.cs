@@ -34,6 +34,7 @@ namespace DbFirstCrud.Controllers
 
         public IActionResult Detail(string id)
         {
+
             Customer customer = _Context.Customers.Where(p => p.CustomerId == id).FirstOrDefault();
             return View(customer);
         }
@@ -82,17 +83,17 @@ namespace DbFirstCrud.Controllers
         [HttpPost]
         public IActionResult Create(Customer customer)
         {
-            var customerId = _Context.Customers.Max(custid => custid.CustomerId);
-            long customerNo;
+            //var customerId = _Context.Customers.Max(custid => custid.CustomerId);
+            //long customerNo;
 
-            Int64.TryParse(customerId.Substring(2,customerId.Length-2), out customerNo);
-            if(customerNo > 0)
-            {
-                customerNo= customerNo + 1;
-                customerId="Cs"+ customerNo.ToString();
+            //Int64.TryParse(customerId.Substring(2,customerId.Length-2), out customerNo);
+            //if(customerNo > 0)
+            //{
+            //    customerNo= customerNo + 1;
+            //    customerId="Cs"+ customerNo.ToString();
 
-            }
-            customer.CustomerId = customerId;
+            //}
+           // customer.CustomerId = customerId;
             _Context.Attach(customer);
             _Context.Entry(customer).State = EntityState.Added;
             _Context.SaveChanges();
